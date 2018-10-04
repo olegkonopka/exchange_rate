@@ -1,0 +1,48 @@
+<div class="container-fluid">
+  <br>
+  <%=form_for Rate.new, html: {class: 'form-group form-group col-md-2'}, method: 'post' do |f| %>
+    <div class="row">
+      <div class="col">
+	    <%=f.text_field :from, class: 'form-control', required: true, placeholder: 'From' %>
+	  </div>
+	  <div class="col">
+	    <%=f.text_field :to, class: 'form-control', required: true, placeholder: 'To' %>
+	  </div>
+	  <div class="col">
+	    <%=f.submit 'Add Rate', class: "btn btn-primary" %>
+	  </div>
+    </div>
+  <% end %>
+  <br>
+  <%=form_tag('/', method: 'post', class: 'form-group col-md-2') do %>
+    <div class="row">
+      <div class="col">
+  		<%= text_field_tag :amount,@amount, placeholder: 'Type value',class: 'form-control' %>
+  	  </div>
+      <div class="col">
+        <%= submit_tag 'Exchange', class: "btn btn-primary" %>
+  	  </div>
+    </div>
+  <% end %>
+  <br>
+  <table class="table">
+    <thead>
+      <tr>	
+        <th scope="col">From</th>
+        <th scope="col">To</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Updated</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @rates.each do |rate| %>                    
+        <tr>
+          <td><%=rate.from %></td>
+          <td><%=rate.to %></td>
+          <td><%=rate.amount.round(2) %></td>
+          <td><%=time_ago_in_words(rate.updated_at) %></td>
+        </tr>
+      <% end %>	
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,4 @@
+update_rates:
+  cron: "*/1 * * * *"
+  class: "UpdateRatesJob"
+  queue: default
